@@ -3,6 +3,9 @@ use bevy::prelude::*;
 mod debug;
 mod camera;
 mod tileset;
+mod mouse;
+
+use mouse::{CursorPos, CursorPlugin};
 use debug::DebugPlugin;
 use tileset::TilesetPlugin;
 
@@ -19,8 +22,9 @@ fn main() {
                 })
                 .set(ImagePlugin::default_nearest()),
         )
+        .init_resource::<CursorPos>()
         .add_plugins(TilesetPlugin)
-        //.add_plugins(DebugPlugin)
+        .add_plugins(CursorPlugin)
         .add_systems(Update, camera::movement)
         .run();
 }
